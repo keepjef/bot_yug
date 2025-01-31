@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/bot-notitficate.iml" filepath="$PROJECT_DIR$/.idea/bot-notitficate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/bot_yug.iml" filepath="$PROJECT_DIR$/.idea/bot_yug.iml" />
     </modules>
   </component>
 </project>
