@@ -3,12 +3,12 @@ from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
-
+import time
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
 
 # Инициализация бота и диспетчера
-API_TOKEN = "6886028658:AAGvrrTKKMjzPhV0J3sdzEwleV8bOMGGS_8"
+API_TOKEN = "7600020466:AAEpvQn-bo8E2LalBLDqG6sXwzaX6xAmHVs"
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
 
