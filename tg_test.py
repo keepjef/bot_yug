@@ -111,6 +111,13 @@ async def process_day(message: Message, state: FSMContext):
 
         if 1 <= day <= 31:
             await state.update_data(day=day)
+            user_data = await state.get_data()
+            day = user_data.get('day')
+            month = user_data.get('month')
+            year = user_data.get('year')
+            date_str = f"{day:02d}.{month:02d}.{year}"
+            date = datetime.strptime(date_str, "%d.%m.%Y").date()
+            await state.update_data(date=date)
             await message.answer("День выбран. Выберите час.", reply_markup=create_hours_keyboard())
             await state.set_state(ReminderStates.time_hour)
         else:
@@ -140,16 +147,19 @@ async def process_minutes(message: Message, state: FSMContext):
 
         if 00 <= minutes <= 59:
             user_data = await state.get_data()
-            current_datetime = user_data.get('datetime')
-            text = message.text
-            now = datetime.now()
+            hour = user_data['hours']
 
-            delay = (current_datetime - now).total_seconds()
+            time_str = f"{hour:02d}:{minutes:02d}"
+            time = datetime.strptime(time_str, "%H:%M").time()
+            date = user_data.get('date')
+            current_datetime = datetime.combine(date, time)
+            print(user_data)
+            now = datetime.now()
             if current_datetime <= now:
                 await message.answer("Время в прошлом. Начните сначала.")
                 await state.clear()
                 return
-            await state.update_data(minutes=minutes)
+            await state.update_data(time=time, datetime=current_datetime)
             await message.answer("Отлично! Время выбрано, теперь напишите текст.", reply_markup=types.ReplyKeyboardRemove())
             await state.set_state(ReminderStates.text)
         else:
